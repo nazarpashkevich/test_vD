@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/events/{event}/vacancies', [EventController::class, 'getPlaces'])->name('event.places');
+Route::get('/events/', [EventController::class, 'getItems'])->name('events.items');
+
+Route::get('/test', function () {
+    Schema::drop('reservations');
+});
+Route::post('/reservation/reserve', [ReservationController::class, 'reserve'])->name('reservation.reserve');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 });

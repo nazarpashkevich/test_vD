@@ -10,4 +10,14 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+        \View::share('title', '');
+    }
+
+    public function setTitle(string $title): void
+    {
+        \View::share('title', $title);
+    }
 }

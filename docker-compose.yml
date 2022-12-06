@@ -13,7 +13,6 @@ services:
             APACHE_DOCUMENT_ROOT: /var/www/html/public
     mysql:
         image: mariadb:latest
-        container_name: mysql_voodoo
         restart: always
         volumes:
             - ./mysql-data:/var/lib/mysql
