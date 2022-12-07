@@ -1,0 +1,25 @@
+version: '2'
+services:
+    webserver:
+        build:
+            dockerfile: 'docker-config/.PHPDockerfile'
+        ports:
+            - "80:80"
+        container_name: webserver_voodoo
+        volumes:
+            - ./:/var/www/html
+        environment:
+            XDEBUG_CONFIG: remote_host=host.docker.internal
+            APACHE_DOCUMENT_ROOT: /var/www/html/public
+    mysql:
+        image: mariadb:latest
+        restart: always
+        volumes:
+            - ./mysql-data:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: 'bproddb'
+            MYSQL_USER: 'bprod'
+            MYSQL_PASSWORD: '123123'
+            MARIADB_ROOT_PASSWORD: '333333'
+        ports:
+            - 3306:3306
