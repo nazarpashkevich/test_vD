@@ -21,11 +21,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/events/{event}/vacancies', [EventController::class, 'getPlaces'])->name('event.places');
 Route::get('/events/', [EventController::class, 'getItems'])->name('events.items');
 
-Route::get('/test', function () {
-    Schema::drop('reservations');
-});
 Route::post('/reservation/reserve', [ReservationController::class, 'reserve'])->name('reservation.reserve');
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
